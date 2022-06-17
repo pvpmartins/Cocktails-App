@@ -23,6 +23,13 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+ul {
+  padding: 0;
+}
+ul > li
+{
+    list-style-type: none;
+}
 
 .App-link {
   color: #61dafb;
