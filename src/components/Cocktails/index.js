@@ -7,14 +7,22 @@ const Cocktails = () => {
 
     const [ingList, setIngList] = useState([])
 
+    const [measList, setMeasList] = useState([])
+
     const listIngredients = () => {    
         const ingKeys = Object.keys(state)
         .filter(el => el.startsWith("strIngredient"))
         const ingredients= ingKeys.map(ing=>state[ing])
-        const ingAvailable = ingredients.filter(ing => ing !== null)
+        const ingAvailable = ingredients.filter(ing => !!ing)
+        const measKeys = Object.keys(state)
+        .filter(el => el.startsWith("strMeasure"))
+        const measurements = measKeys.map(meas => state[meas])
+        const measAvailable = measurements.filter(meas=> !!meas)
 
+
+        setMeasList(measAvailable)
         setIngList(ingAvailable)
-        console.log(ingAvailable)
+        console.log(measAvailable,ingAvailable, state)
     }
 
     useEffect(()=> {
@@ -24,13 +32,16 @@ const Cocktails = () => {
     return(
         <div className="App">
             {
-                Object.keys(state).length !== 0 &&
+                Object.keys(state).length !== 0 
+                
+                &&
+
                 <>
-                <h1>{ state.strDrink}</h1>
-                <img src={state.strDrinkThumb} alt="" />
+                <h1>{ state.strDrink }</h1>
+                <img src={ state.strDrinkThumb } alt="" />
 
                 <h2>Ingredients:</h2>
-                <ul>{ingList.map((ing, index)=><li key={index}>{ing}</li>)}</ul>
+                <ul>{ingList.map((ing, index)=><li key={index}>{measList[index]} of {ing}</li>)}</ul>
                 </>
             }
         </div>
