@@ -1,23 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import { Link } from "react-router-dom";
+import { useEffect } from 'react';
 
 function App() {
+  const [dataApi, setDataApi] = useState()
+
+
+  const fetchApi = async () => {
+      const res = await fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php')
+      const json = await res.json()
+      setDataApi(json)
+    
+  }
+
+  useEffect(() => {
+    fetchApi()
+  },[])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      
+        <Link to="/cocktails" state={dataApi}><h1>Revelar drink!</h1></Link>
+      
+      
     </div>
   );
 }
