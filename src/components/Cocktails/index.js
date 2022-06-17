@@ -23,11 +23,16 @@ const Cocktails = () => {
 
     return(
         <div className="App">
-            <h1>{state.strDrink}</h1>
-            <img src={state.strDrinkThumb} alt="" />
+            {
+                Object.keys(state).length !== 0 &&
+                <>
+                <h1>{ state.strDrink}</h1>
+                <img src={state.strDrinkThumb} alt="" />
 
-            <h2>Ingredients:</h2>
-            <ul>{ingList.map((ing, index)=><li key={index}>{ing}</li>)}</ul>
+                <h2>Ingredients:</h2>
+                <ul>{ingList.map((ing, index)=><li key={index}>{ing}</li>)}</ul>
+                </>
+            }
         </div>
     )
 
